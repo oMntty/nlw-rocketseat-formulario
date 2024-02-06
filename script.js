@@ -1,3 +1,5 @@
+
+// Perguntas que foram geradas pelo CHAT GPT
 const perguntas = [
   {
     pergunta: "Qual é a forma correta de declarar uma variável em JavaScript?",
@@ -91,12 +93,12 @@ const perguntas = [
   },
 ];
 
-const quiz = document.querySelector('#quiz')
-const template = document.querySelector('template')
+const quiz = document.querySelector('#quiz') //Constante que pesquisa o termo QUIZ pra poder dar as funcoes no codigo
+const template = document.querySelector('template') //Constante que tambem pesquisa o termo, so que agora ele puxa o NODE da Template pra poder repetir e criar o loop do meu codigo.
 
 //Loop de repeticao
 for (const item of perguntas) {
-  const quizItem = template.content.cloneNode(true)
+  const quizItem = template.content.cloneNode(true) //Tive que instalar o Node pra poder rodar dentro do Visual Studio Code.
   quizItem.querySelector('h3').textContent = item.pergunta
 
 
