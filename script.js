@@ -96,6 +96,12 @@ const perguntas = [
 const quiz = document.querySelector('#quiz') //Constante que pesquisa o termo QUIZ pra poder dar as funcoes no codigo
 const template = document.querySelector('template') //Constante que tambem pesquisa o termo, so que agora ele puxa o NODE da Template pra poder repetir e criar o loop do meu codigo.
 
+
+const corretas = new Set() //O set eh um conjunto que eu posso adicionar ou tirar, mas nunca posso repetir o que tem dentro dele.
+const totalDePerguntas = perguntas.length  //Todas as vezes que formos falar de variavel, usaremos camel case, que eh exatamente isso que voce ta pensando. se der espaco quebra o codigo. Uma array tambem eh um objeto e por isso estamos puxando o length no perguntas
+const mostrarTotal = document.querySelector('#acertos span')
+mostrarTotal.textContent = corretas.size + ' de ' + totalDePerguntas // Aqui a gente procurou o ID e definiu que ele quer alem da parte de Acertos, ele quer o filho que eh o Span. 
+
 //Loop de repeticao
 for (const item of perguntas) {
   const quizItem = template.content.cloneNode(true) //Tive que instalar o Node pra poder rodar dentro do Visual Studio Code.
@@ -105,10 +111,23 @@ for (const item of perguntas) {
   for (let resposta of item.respostas) {
     const dt = quizItem.querySelector('dl dt').cloneNode(true)
     dt.querySelector('span').textContent = resposta
+    dt.querySelector('input').setAttribute('name', 'pergunta-' + perguntas.indexOf(item))
+    dt.querySelector('input').value = item.respostas.indexOf(resposta)
+    dt.querySelector('input').onchange = (event) => {
+      const estaCorreta = event.target.value == item.correta; //Estava dando erro por falta do ; no final do item.correta 
+
+      corretas.delete(item) //Aqui esta dizendo que se voce mudar de opiniao ou trocar a selecao no formulario, ele vai desconsiderar a sua primeira resposta e nao vai repetir novamente no codigo.
+      if (estaCorreta) {
+        corretas.add(item)
+      }
+      mostrarTotal.textContent = corretas.size + ' de ' + totalDePerguntas
+    }
+
+
 
     quizItem.querySelector('dl').appendChild(dt)
   }
-
+  // Remover ele elemento da tela.
   quizItem.querySelector('dl dt').remove()
 
   // Coloca a pergunta na tela
