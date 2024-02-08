@@ -155,3 +155,7 @@ function showIcons() {
 
 window.addEventListener('scroll', showIcons);
 showIcons();
+
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
