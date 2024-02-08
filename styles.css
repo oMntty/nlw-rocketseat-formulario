@@ -137,21 +137,24 @@ input:checked:before {
 footer {
   text-align: center;
   padding: 20px;
+  position: relative;
 }
 
 .social-icon {
   width: 30px;
   height: auto;
   margin: 0 10px;
-  filter: invert(59%) sepia(76%) saturate(313%) hue-rotate(193deg) brightness(97%) contrast(96%);
-  opacity: 0; /* Começa com a opacidade 0 para o efeito de fade-in */
+  filter: invert(59%) sepia(76%) saturate(313%) hue-rotate(193deg)
+    brightness(97%) contrast(96%);
+  opacity: 0;
+  position: relative; /* Adiciona posição relativa para que z-index funcione */
+  z-index: 0; /* Ajusta o z-index para que os ícones fiquem abaixo da aba de acertos */
 }
 
 .social-icon.show {
   opacity: 1; /* Altera a opacidade para 1 quando a classe show é adicionada */
   transition: opacity 0.5s ease; /* Adiciona uma transição suave para o efeito de fade-in */
 }
-
 
 #acertos {
   text-align: center;
@@ -162,7 +165,8 @@ footer {
   width: 100%;
   padding: 12px;
   border-radius: 6px;
-  opacity: 0; /* Começa com a opacidade 0 para o efeito de fade-in */
-  animation: fadeIn 1s ease-in-out forwards; /* Adicionando animação de fade-in */
-  animation-delay: 1s; /* Atraso de 1 segundo */
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+  animation-delay: 1s;
+  z-index: 1; /* Ajusta o z-index para que a aba de acertos fique acima dos ícones */
 }
