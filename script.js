@@ -133,3 +133,25 @@ for (const item of perguntas) {
   // Coloca a pergunta na tela
   quiz.appendChild(quizItem)
 }
+
+function isInViewport(element) {
+  const rect = element.getBoundingClientRect();
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+  );
+}
+
+function showIcons() {
+  const icons = document.querySelectorAll('.social-icon');
+  icons.forEach(icon => {
+    if (isInViewport(icon)) {
+      icon.classList.add('show');
+    }
+  });
+}
+
+window.addEventListener('scroll', showIcons);
+showIcons();
